@@ -54,7 +54,7 @@ module.exports = (robot) ->
 
     # Short circuit if there is no GitHub connection
     if !github_conn
-      msg.send "Unable to obtain GitHub connection, please verify your credentials"
+      msg.send "Unable to obtain GitHub connection, please verify your credentials."
       return
 
     repo_name = msg.match[4]
@@ -62,24 +62,43 @@ module.exports = (robot) ->
       getPullRequests(repo_name)
         .then (results) ->
           if results.length is 0
-            msg.send "There are no open pull requests for #{ repo_name }"
+            msg.send "There are no open pull requests for #{ repo_name }."
           else
-            postRepoHeader results[0].head.repo.full_name if results.length > 0
+            is_singular = results.length is 1
+            msg.send "There #{ if is_singular then 'is' else 'are' } #{ results.length } open pull request" +
+              "#{ if !is_singular then 's' else '' } for #{ repo_name }."
+            postRepoHeader(results[0].head.repo.full_name) if results.length > 0
             postPullRequests results
         .catch (error) ->
           handlePRError error, repo_name
     else
       github_conn.reposAsync()
         .then (repos) ->
-          for repo in repos
-            getPullRequests(repo.full_name)
-              .then (results) ->
-                postRepoHeader results[0].head.repo.full_name if results.length > 0
-                postPullRequests results
-              .catch (error) ->
-                handlePRError error, repo.full_name
+          Promise.reduce(repos, pullRequestReducer, {}).then (pull_requests) ->
+            keys = Object.keys pull_requests
+            if keys.length is 0
+              msg.send "There are no open pull requests, get to work!"
+            else
+              is_singular = keys.length is 1
+              msg.send "There #{ if is_singular then 'is' else 'are' } #{ keys.length } open pull request" +
+                "#{ if !is_singular then 's' else }."
+              keys.sort()
+              for k in keys
+                postRepoHeader k
+                postPullRequests pull_requests[k]
         .catch (error) ->
-          msg.send "Unable to retreive repositories, please verify your credentials"
+          msg.send "Unable to retreive repositories, please verify your credentials."
+
+    # Maps pull requests by repository and counts total
+    pullRequestReducer = (pull_requests, repo) ->
+      return getPullRequests(repo.full_name)
+        .then (results) ->
+          if results.length > 0
+            pull_requests[results[0].head.repo.full_name] = results
+          return pull_requests
+        .catch (error) ->
+          handlePRError error, repo.full_name
+          return pull_requests
 
     # Post a list of pull requests
     postPullRequests = (requests) ->
