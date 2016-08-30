@@ -1,8 +1,8 @@
 {
   "name": "hubot-octocat",
-  "description": "A hubot script that does the things",
+  "description": "A hubot script that provides Github repository information",
   "version": "0.1.0",
-  "author": "Brian Berg <brianberg.se@gmail.com>",
+  "author": "Brian Berg",
   "license": "MIT",
   "keywords": "hubot, hubot-scripts",
   "repository": {
