@@ -1,8 +1,13 @@
 # hubot-octocat
 
-A hubot script that does the things
+A hubot script that provides Github repository information
 
 See [`src/octocat.coffee`](src/octocat.coffee) for full documentation.
+
+## Commands
+
+* `hubot show prs` - Displays a list of open pull requests for all repositories.
+* `hubot show prs <repo_name>` - Displays a list of open pull requests for a particular repository
 
 ## Installation
 
@@ -18,11 +23,31 @@ Then add **hubot-octocat** to your `external-scripts.json`:
 ]
 ```
 
+## Configuration
+The plugin depends on environment variables beginning with `HUBOT_OCTOCAT_`. The following configurations are available:
+
+* `HUBOT_OCTOCAT_OAUTH_TOKEN` - (Required) A GitHub OAuth token
+* `HUBOT_OCTOCAT_USER`        - A GitHub username
+* `HUBOT_OCTOCAT_TEAM_ID`     - A GitHub Team ID, takes precedence over HUBOT_OCTOCAT_USER.
+* `HUBOT_OCTOCAT_ORG`         - A GitHub organization name, takes precedence over HUBOT_OCTOCAT_TEAM_ID
+
+A username, team ID, or organization name must be specified.
+
 ## Sample Interaction
 
 ```
-user> hubot hello
-hubot> hello!
+user> hubot show pull requests
+hubot>
+┌─────────────────────┐
+│ org/awesome-project │
+└┬────────────────────┘
+ ├─ #24 Fix all things » unassigned @ github.com/org/awesome-project/pulls/24
+ └─ #27 Important change » someone @ github.com/org/awesome-project/pulls/27
+
+┌─────────────────────┐
+│ org/another-project │
+└┬────────────────────┘
+ └─ #12 Fix all things » someone @ github.com/org/another-project/pulls/12
 ```
 
 ## NPM Module

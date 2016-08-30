@@ -13,6 +13,8 @@
     "url": "https://github.com/hubot-scripts/hubot-octocat/issues"
   },
   "dependencies": {
+    "bluebird": "^3.4.4",
+    "octonode": "^0.7.6"
   },
   "peerDependencies": {
     "hubot": "2.x"
