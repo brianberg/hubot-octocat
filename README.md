@@ -38,15 +38,14 @@ A username, team ID, or organization name must be specified.
 ```
 user> hubot show pull requests
 hubot>
-┌─────────────────────┐
-│ org/awesome-project │
-└┬────────────────────┘
+
+ org/awesome-project
+─┬────────────────────
  ├─ #24 Fix all things » unassigned @ github.com/org/awesome-project/pulls/24
  └─ #27 Important change » someone @ github.com/org/awesome-project/pulls/27
 
-┌─────────────────────┐
-│ org/another-project │
-└┬────────────────────┘
+ org/another-project
+─┬───────────────────
  └─ #12 Fix all things » someone @ github.com/org/another-project/pulls/12
 ```
 

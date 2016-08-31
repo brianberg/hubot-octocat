@@ -24,12 +24,8 @@ octonode = Promise.promisifyAll(require 'octonode')
 # Box drawing characters
 BOX_LINE = '─'
 BOX_LINE_DOWN = '┬'
-BOX_LINE_VERT = '│'
 BOX_LINE_VERT_RIGHT = '├'
-BOX_TOP_LEFT = '┌'
-BOX_TOP_RIGHT = '┐'
 BOX_BOT_LEFT = '└'
-BOX_BOT_RIGHT = '┘'
 
 OCTONODE_ERROR_NOT_FOUND = "Error: Not Found"
 
@@ -109,10 +105,8 @@ module.exports = (robot) ->
 
     # Post repository header
     postRepoHeader = (title) ->
-      top = BOX_TOP_LEFT + Array(title.length + 3).join(BOX_LINE) + BOX_TOP_RIGHT
-      mid = BOX_LINE_VERT + ' ' + title + ' ' + BOX_LINE_VERT
-      bot = BOX_BOT_LEFT + BOX_LINE_DOWN + Array(title.length + 2).join(BOX_LINE) + BOX_BOT_RIGHT
-      msg.send "\n#{ top }\n#{ mid }\n#{ bot }"
+      line = BOX_LINE + BOX_LINE_DOWN + Array(title.length + 1).join(BOX_LINE)
+      msg.send "\n #{ title } \n#{ line }"
 
     # Post pull request details
     postPullRequest = (pr, is_last) ->
