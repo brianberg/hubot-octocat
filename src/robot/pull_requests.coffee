@@ -39,6 +39,7 @@ module.exports = (robot) ->
         .catch (error) ->
           handlePRError error, repo_name
     else
+      msg.send "Searching repositories..."
       octocat.getRepos()
         .then (repos) ->
           Promise.reduce(repos, pullRequestReducer, {}).then (pull_requests) ->
