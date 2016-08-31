@@ -1,16 +1,16 @@
 {
   "name": "hubot-octocat",
   "description": "A hubot script that provides Github repository information",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Brian Berg",
   "license": "MIT",
-  "keywords": "hubot, hubot-scripts",
+  "keywords": "hubot, hubot-scripts, github",
   "repository": {
     "type": "git",
-    "url": "git://github.com/hubot-scripts/hubot-octocat.git"
+    "url": "git://github.com/brianberg/hubot-octocat.git"
   },
   "bugs": {
-    "url": "https://github.com/hubot-scripts/hubot-octocat/issues"
+    "url": "https://github.com/brianberg/hubot-octocat/issues"
   },
   "dependencies": {
     "bluebird": "^3.4.4",
