@@ -2,12 +2,10 @@
 
 A hubot script that provides Github repository information
 
-See [`src/octocat.coffee`](src/octocat.coffee) for full documentation.
-
 ## Commands
 
-* `hubot show prs` - Displays a list of open pull requests for all repositories.
-* `hubot show prs <repo_name>` - Displays a list of open pull requests for a particular repository
+* `hubot (show) prs`                   - Displays a list of open pull requests for all repositories
+* `hubot (show) prs (for) <repo_name>` - Displays a list of open pull requests for a particular repository
 
 ## Installation
 
@@ -36,8 +34,8 @@ A username, team ID, or organization name must be specified.
 ## Sample Interaction
 
 ```
-user> hubot show pull requests
-hubot>
+user> hubot show prs
+hubot> There are 3 open pull requests.
 
  org/awesome-project
 ─┬────────────────────
