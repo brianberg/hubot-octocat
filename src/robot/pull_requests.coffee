@@ -22,7 +22,7 @@ OCTONODE_ERROR_NOT_FOUND = "Error: Not Found"
 module.exports = (robot) ->
 
   # Show open pull requests
-  robot.respond /(show\s)?(prs|pull requests)(\sfor\s)?(.*)?/i, (msg) ->
+  robot.respond /(show\s)?(prs|pull\srequests)(\sfor)?\s?(.*)?/i, (msg) ->
 
     repo_name = msg.match[4]
     if repo_name?
@@ -77,15 +77,15 @@ module.exports = (robot) ->
 
     # Post repository header
     postRepoHeader = (title) ->
-      line = BOX_LINE + BOX_LINE_DOWN + Array(title.length + 1).join(BOX_LINE)
-      msg.send "\n #{ title } \n#{ line }"
+      line = BOX_LINE_DOWN + Array(title.length).join(BOX_LINE)
+      msg.send "\n#{ title }\n#{ line }"
 
     # Post pull request details
     postPullRequest = (pr, is_last) ->
       assigned = if pr.assignee.login then pr.assignee.login else "unassigned"
       url = pr.html_url.replace(/.*?:\/\//g, "")
       bullet = if is_last then BOX_BOT_LEFT else BOX_LINE_VERT_RIGHT
-      msg.send " #{bullet + BOX_LINE } ##{ pr.number } #{ pr.title } » #{ assigned } @ #{ url }"
+      msg.send "#{bullet + BOX_LINE } ##{ pr.number } #{ pr.title } » #{ assigned } @ #{ url }"
 
     # Handle get pull requests erros
     handlePRError = (error, repo_name) ->
