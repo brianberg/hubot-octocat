@@ -3,6 +3,7 @@
 #
 # Dependencies:
 #   "bluebird": "^3.4.3",
+#   "moment": "^2.14.1",
 #   "octonode": "^0.7.6"
 #
 # Configuration:
@@ -15,6 +16,7 @@
 #   brianberg
 
 Promise  = require 'bluebird'
+moment   = require 'moment'
 octonode = Promise.promisifyAll(require 'octonode')
 
 # GitHub connection and user setup
@@ -37,3 +39,22 @@ module.exports =
   # Get all repositories
   getRepos : ->
     return github_conn.reposAsync()
+
+  usingAdapter : (robot, adapter_name) ->
+    return `robot.adapterName == adapter_name`
+
+  # Parse pull request information
+  parsePullRequest : (pr) ->
+    author = {
+      name : pr.user.login,
+      link : pr.user.html_url,
+      icon : pr.user.avatar_url
+    }
+    return {
+      author   : author,
+      title    : pr.number + ' ' + pr.title,
+      text     : pr.body,
+      assigned : if pr.assignee.login then pr.assignee.login else "unassigned"
+      url      : pr.html_url.replace(/.*?:\/\//g, ""),
+      updated  : moment(pr.updated_at).fromNow()
+    }

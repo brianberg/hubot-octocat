@@ -1,7 +1,7 @@
 {
   "name": "hubot-octocat",
   "description": "A hubot script that provides Github repository information",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "author": "Brian Berg",
   "license": "MIT",
   "keywords": "hubot, hubot-scripts, github",
@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "bluebird": "^3.4.4",
+    "moment": "^2.14.1",
     "octonode": "^0.7.6"
   },
   "peerDependencies": {

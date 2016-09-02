@@ -37,14 +37,14 @@ A username, team ID, or organization name must be specified.
 user> hubot show prs
 hubot> There are 3 open pull requests.
 
- org/awesome-project
-─┬────────────────────
- ├─ #24 Fix all things » unassigned @ github.com/org/awesome-project/pulls/24
- └─ #27 Important change » someone @ github.com/org/awesome-project/pulls/27
+org/awesome-project
+┬──────────────────
+├─ #24 Fix all the things » unassigned » updated 45 seconds ago
+└─ #27 Important change » someone » updated 2 days ago
 
  org/another-project
-─┬───────────────────
- └─ #12 Fix all things » someone @ github.com/org/another-project/pulls/12
+┬───────────────────
+└─ #12 Fix all things » someone » updated 5 days ago
 ```
 
 ## NPM Module
